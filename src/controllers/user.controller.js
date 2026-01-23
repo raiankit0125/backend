@@ -1,15 +1,14 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js"
-import { user } from "../models/user.model.js"
+import { User } from "../models/user.model.js"
 import { uploadCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { useReducer } from "react";
 
 const generateAccessAndRefreshTokens = async(userId) => {
     try {
-        const user = await user.findById(userId)
-        const accessToken = user.generateAccessToken()
-        const refreshToken = user.generateRefreshToken()
+        const user = await User.findById(userId)
+        const accessToken = User.generateAccessToken()
+        const refreshToken = User.generateRefreshToken()
 
         user.refreshToken = refreshToken
         await user.save({ validateBeforeSave: false })
@@ -144,7 +143,7 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const logoutUser = asyncHandler(async(req, res) => {
-   await user.findByIdAndUpdate()
+   await User.findByIdAndUpdate()
     req.user._id,{
         $set: {
             refreshToken: undefined

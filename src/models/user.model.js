@@ -62,7 +62,7 @@ userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
 
-userSchema.methods.generateAccesTokens = function(){
+userSchema.methods.generateAccessTokens = function(){
     return jwt.sign(
         {
             id: this._id,
@@ -90,4 +90,4 @@ userSchema.methods.generateRefreshTokens = function(){
 
 
 
-export const user = mongoose.model("User", userSchema)
+export const User = mongoose.model("User", userSchema)
