@@ -5,7 +5,7 @@ import { uploadCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { useReducer } from "react";
 
-const generateAccessAndRefreshTokens = async(userId => {
+const generateAccessAndRefreshTokens = async(userId) => {
     try {
         const user = await user.findById(userId)
         const accessToken = user.generateAccessToken()
@@ -19,7 +19,7 @@ const generateAccessAndRefreshTokens = async(userId => {
     } catch (error) {
         throw new ApiError(500, "Something went wrong while generating refresh and access token")
     }
-})
+}
 
 const registerUser = asyncHandler(async (req, res) => {
     //get user details from frontend
